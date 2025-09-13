@@ -14,7 +14,7 @@ Con este codigo se construye una matriz compuesta de transformación (traslació
 T = traslation(tx, ty) @ rotation(angle) @ scale(scaleT, scaleT)
 transformed = T @ triangle
 ```
-![Animación del triangulo](/2025-09-12_taller_0_transformaciones/python/triangulo.gif)
+![Animación python](/2025-09-12_taller_0_transformaciones/python/triangulo.gif)
 
 # Three.js 
 
@@ -27,3 +27,26 @@ Se creó un  **donut** y se aplicaron las siguientes transformaciones:
 - **Interactividad**: se incluyeron controles de cámara OrbitControls.  
 
 ![Animación threejs](/2025-09-12_taller_0_transformaciones/threejs/donut.gif)
+
+# Processing
+
+Este sketch genera un GIF animado de una elipse en 2D.  
+
+- **translate()**: centra la figura en la pantalla.  
+- **rotate()**: aplica una rotación continua basada en `frameCount`.  
+- **scale()**: genera un efecto de  al cambiar el tamaño con una función seno.  
+- **pushMatrix()/popMatrix()**: aíslan las transformaciones para que solo afecten a la elipse.  
+
+### Codigo
+
+```java
+pushMatrix();                     // Guardar estado actual
+translate(width/2, height/2);     // Mover al centro
+float angle = radians(frameCount % 360);
+rotate(angle);                    // Rotación continua
+float s = 1.0 + 0.5 * sin(radians(frameCount));
+scale(s);                         // Escalado oscilante
+ellipse(0, 0, 200, 120);          // Dibujo de la elipse
+popMatrix();                      // Restaurar estado
+```
+![Animación processing](/2025-09-12_taller_0_transformaciones/processing/elipse.gif)
